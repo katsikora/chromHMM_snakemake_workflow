@@ -5,4 +5,11 @@ configfile: "config/organism.yaml"
 
 #######################################################################################
 
+wildcard_constraints:
+    k = [ str(x) for x in range(config["min_states"],config["max_states"]+1)]
+
+
 include: "snakefiles/segment.smk"
+include: "snakefiles/enrichments.smk"
+
+
