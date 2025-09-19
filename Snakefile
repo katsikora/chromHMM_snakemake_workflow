@@ -1,7 +1,7 @@
 ################################config files ############################################
 
 configfile: "config/config.yaml"
-configfile: "config/organism.yaml"
+configfile: "organisms/mm10_gencodeM19.yaml"
 
 #######################################################################################
 

@@ -2,4 +2,4 @@ input_dir: test_data
 cellmarkfiletable: test_data/cellmarkfiletable.tsv
 min_states: 4
 max_states: 8
-organism: "/data/manke/sikora/karayol/snakePipes_organism.yaml"
+organism: "organisms/mm10_gencodeM19.yaml"
