@@ -3,7 +3,7 @@ rule binarizeBam:
         bam_dir = input_dir,
         sample_table = cellmarkfiletable,
         chrom_sizes = chrom_sizes #from organism.yaml, require
-    output: temp(dir("binarizedBams"))
+    output: touch("binarizedBams/done.all")
     params:
     modulefile: "chromhmm/1.25"
     log: "logs/binarizeBam.log"
@@ -11,16 +11,11 @@ rule binarizeBam:
         ChromHMM.sh BinarizeBam -paired {input.chrom_sizes} {input.bam_dir} {input.sample_table} {output} 2>{log}
         """
 
-def collect_binarized_bams():
-    a
-    return a
-
-
 rule segmentBam:
     input:
-        binarizedBams = collect_binarized_bams()
+        binarizedBams = "binarizedBams/done.all"
     output:
-        dir("model_{k}_output")
+        touch("model_{k}_output/done.all")
     params:
         num_states = lambda wildcards: wildcards.k,
         genome = genome,
