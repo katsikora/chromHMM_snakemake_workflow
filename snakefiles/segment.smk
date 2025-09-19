@@ -11,7 +11,7 @@ rule binarizeBam:
         ChromHMM.sh BinarizeBam -paired {input.chrom_sizes} {input.bam_dir} {input.sample_table} {output} 2>{log}
         """
 
-rule segmentBam:
+checkpoint segmentBam:
     input:
         binarizedBams = "binarizedBams/done.all"
     output:
