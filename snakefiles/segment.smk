@@ -1,27 +1,31 @@
 rule binarizeBam:
     input: 
-        bam_dir = input_dir,
-        sample_table = cellmarkfiletable,
-        chrom_sizes = chrom_sizes #from organism.yaml, require
+        bam_dir = config["input_dir"],
+        sample_table = config["cellmarkfiletable"],
+        chrom_sizes = config["chrom_sizes"] 
     output: touch("binarizedBams/done.all")
     params:
-    modulefile: "chromhmm/1.25"
+        out_dir = "binarizedBams"
+    envmodules: "chromhmm/1.25"
     log: "logs/binarizeBam.log"
     shell: """
-        ChromHMM.sh BinarizeBam -paired {input.chrom_sizes} {input.bam_dir} {input.sample_table} {output} 2>{log}
+        ChromHMM.sh BinarizeBam -paired {input.chrom_sizes} {input.bam_dir} {input.sample_table} {params.out_dir} 2>{log}
         """
 
-checkpoint segmentBam:
+rule segmentBam:
     input:
         binarizedBams = "binarizedBams/done.all"
     output:
-        touch("model_{k}_output/done.all")
+        expand("model_{{k}}_output/{group}_{{k}}_segments.bed",group=get_groups(config["cellmarkfiletable"]))
     params:
         num_states = lambda wildcards: wildcards.k,
-        genome = genome,
-        binarizedBams = "binarizedBams"
-    modulefile: "chromhmm/1.25"
+        genome = config["genome"],
+        binarizedBams = "binarizedBams",
+        out_dir = "model_{k}_output"
+    log: 
+        expand("logs/model_{{k}}_{group}_learnModel.log",group=get_groups(config["cellmarkfiletable"]))
+    envmodules: "chromhmm/1.25"
     shell: """
-        ChromHMM.sh LearnModel {params.binarizedBams} {output} {params.num_states} {params.genome}
+        ChromHMM.sh LearnModel -noautoopen {params.binarizedBams} {params.out_dir} {params.num_states} {params.genome}
         """
 
