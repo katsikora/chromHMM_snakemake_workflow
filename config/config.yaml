@@ -2,7 +2,7 @@ input_dir: "test_data"
 cellmarkfiletable: "test_data/cellmarkfiletable.tsv"
 min_states: 4
 max_states: 4
-chrom_sizes: "organisms/chrom_sizes.tsv"
+chrom_sizes: 
 genome: "mm10"
-input_bed: "organisms/input_bed"
-TSS_bed: "organisms/TSS0.bed"
+input_bed: 
+TSS_bed: 

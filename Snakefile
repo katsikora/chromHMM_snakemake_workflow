@@ -51,6 +51,7 @@ def get_groups(cellmarkfiletable):
                 #
     return unique_fields
 
+include: "snakefiles/organism.smk"
 include: "snakefiles/segment.smk"
 include: "snakefiles/enrichments.smk"
 
