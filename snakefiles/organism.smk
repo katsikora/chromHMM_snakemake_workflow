@@ -3,7 +3,7 @@ org_dict={
          }
 
 rule download_tgz:
-    input: remote(org_dict[organism])
+    input: org_dict[organism]
     output: temp("organisms/" + organism + ".tgz")
     shell: """
             cd organisms && wget {input}
