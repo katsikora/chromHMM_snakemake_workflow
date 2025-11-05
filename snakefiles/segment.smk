@@ -2,7 +2,7 @@ rule binarizeBam:
     input: 
         bam_dir = config["input_dir"],
         sample_table = config["cellmarkfiletable"],
-        chrom_sizes = config["chrom_sizes"] 
+        chrom_sizes = config["chrom_sizes"] or "organisms/"+organism+"/chrom_sizes.tsv"
     output: touch("binarizedBams/done.all")
     params:
         out_dir = "binarizedBams"
@@ -19,7 +19,7 @@ rule segmentBam:
         expand("model_{{k}}_output/{group}_{{k}}_segments.bed",group=get_groups(config["cellmarkfiletable"]))
     params:
         num_states = lambda wildcards: wildcards.k,
-        genome = config["genome"],
+        genome = organism,
         binarizedBams = "binarizedBams",
         out_dir = "model_{k}_output"
     log: 

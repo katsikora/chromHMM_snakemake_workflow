@@ -3,7 +3,7 @@ import re
 
 rule overlapEnrichment:
     input: "model_{k}_output/{group}_{k}_segments.bed",
-           config["input_bed"]
+           config["input_bed"] or "organisms/"+organism+"/input_bed"
     output: "model_{k}_output/{group}_{k}_state_enrichments.txt"
     params:
         prefix = "model_{k}_output/{group}_{k}_state_enrichments"
@@ -14,7 +14,7 @@ rule overlapEnrichment:
 
 rule neighbourhoodEnrichment:
     input: "model_{k}_output/{group}_{k}_segments.bed",
-        config["TSS_bed"]
+        config["TSS_bed"] or "organisms/"+organism+"TSS0.bed"
     output: "model_{k}_output/{group}_{k}_TSS_enrichment.txt"
     params:
         prefix = "model_{k}_output/{group}_{k}_TSS_enrichment"

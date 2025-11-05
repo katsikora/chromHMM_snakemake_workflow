@@ -2,8 +2,7 @@ input_dir: "test_data"
 cellmarkfiletable: "test_data/cellmarkfiletable.tsv"
 min_states: 4
 max_states: 4
-organism: "organisms/mm10_gencodeM19.yaml"
-chrom_sizes: "organisms/mm10_chrom_sizes.tsv"
+chrom_sizes: "organisms/chrom_sizes.tsv"
 genome: "mm10"
-input_bed: "organisms/mm10_input_bed"
-TSS_bed: "organisms/mm10_TSS0_corrected.bed"
+input_bed: "organisms/input_bed"
+TSS_bed: "organisms/TSS0.bed"

@@ -1,7 +1,6 @@
 ################################config files ############################################
 
 configfile: "config/config.yaml"
-configfile: "organisms/mm10_gencodeM19.yaml"
 
 #######################################################################################
 
@@ -9,6 +8,11 @@ configfile: "organisms/mm10_gencodeM19.yaml"
 #    k = [ str(x) for x in range(config["min_states"],config["max_states"]+1)]
 num_states = [ str(x) for x in range(config["min_states"],config["max_states"]+1)]
 print(num_states)
+
+org_dict={
+         "mm10": "https://zenodo.org/records/17533220/files/mm10.tgz?download=1"
+         }
+organism=config["genome"]
 
 def get_groups(cellmarkfiletable):
     """
