@@ -3,7 +3,8 @@ storage:
     retrieve=False
 
 org_dict={
-         "mm10": "https://zenodo.org/records/17533220/files/mm10.tgz"
+         "mm10": "https://zenodo.org/records/17533220/files/mm10.tgz",
+         "hg38": "https://zenodo.org/records/17550896/files/hg38.tgz"
          }
 
 rule download_tgz:
