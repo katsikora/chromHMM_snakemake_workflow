@@ -3,13 +3,14 @@ import re
 
 rule overlapEnrichment:
     input: "model_{k}_output/{group}_{k}_segments.bed",
-           config["input_bed"] or "organisms/"+organism+"/input_bed"
+           config["input_bed"] or "organisms/"+organism+"/input_bed/rmsk.bed"
     output: "model_{k}_output/{group}_{k}_state_enrichments.txt"
     params:
-        prefix = "model_{k}_output/{group}_{k}_state_enrichments"
+        prefix = "model_{k}_output/{group}_{k}_state_enrichments",
+        input_bed = subpath(input[1],parent=True)
     envmodules: "chromhmm/1.25"
     shell: """
-        ChromHMM.sh OverlapEnrichment {input[0]} {input[1]} {params.prefix}
+        ChromHMM.sh OverlapEnrichment {input[0]} {params.input_bed} {params.prefix}
         """
 
 rule neighbourhoodEnrichment:
