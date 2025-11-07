@@ -18,6 +18,8 @@ rule extract_archive:
     output: "organisms/" + organism + "/input_bed/rmsk.bed",
             "organisms/"+organism+"/chrom_sizes.tsv",
             "organisms/"+organism+"/TSS0.bed"
+    params:
+        input = organism + ".tgz"
     shell: """
-        tar xzvf {input}
+        cd organisms && tar xzvf {params.input}
            """
