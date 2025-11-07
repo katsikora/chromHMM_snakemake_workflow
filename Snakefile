@@ -1,7 +1,6 @@
 ################################config files ############################################
 
 configfile: "config/config.yaml"
-configfile: "organisms/mm10_gencodeM19.yaml"
 
 #######################################################################################
 
@@ -9,6 +8,8 @@ configfile: "organisms/mm10_gencodeM19.yaml"
 #    k = [ str(x) for x in range(config["min_states"],config["max_states"]+1)]
 num_states = [ str(x) for x in range(config["min_states"],config["max_states"]+1)]
 print(num_states)
+
+organism=config["genome"]
 
 def get_groups(cellmarkfiletable):
     """
@@ -39,7 +40,7 @@ def get_groups(cellmarkfiletable):
                 if fields and fields[0] and fields[0]:
                     unique_fields.add(fields[0])
     except FileNotFoundError:
-        print(f"Error: File not found at {filepath}")
+        print(f"Error: File not found at {cellmarkfiletable}")
         return set()
     except Exception as e:
         print(f"An error occurred while reading the file: {e}")
@@ -47,6 +48,7 @@ def get_groups(cellmarkfiletable):
                 #
     return unique_fields
 
+include: "snakefiles/organism.smk"
 include: "snakefiles/segment.smk"
 include: "snakefiles/enrichments.smk"
 
