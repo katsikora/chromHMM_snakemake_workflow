@@ -15,7 +15,7 @@ rule overlapEnrichment:
 
 rule neighbourhoodEnrichment:
     input: "model_{k}_output/{group}_{k}_segments.bed",
-        config["TSS_bed"] or "organisms/"+organism+"TSS0.bed"
+        config["TSS_bed"] or "organisms/"+organism+"/TSS0.bed"
     output: "model_{k}_output/{group}_{k}_TSS_enrichment.txt"
     params:
         prefix = "model_{k}_output/{group}_{k}_TSS_enrichment"
