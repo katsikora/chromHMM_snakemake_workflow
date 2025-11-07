@@ -16,7 +16,8 @@ rule download_tgz:
 rule extract_archive:
     input: "organisms/" + organism + ".tgz"
     output: "organisms/" + organism + "/input_bed/rmsk.bed",
-            "organisms/"+organism+"/chrom_sizes.tsv"
+            "organisms/"+organism+"/chrom_sizes.tsv",
+            "organisms/"+organism+"/TSS0.bed"
     shell: """
         tar xzvf {input}
            """
